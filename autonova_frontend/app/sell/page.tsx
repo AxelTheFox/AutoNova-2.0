@@ -21,10 +21,31 @@ export default function SellPage() {
         setForm((prev) => ({ ...prev, [field]: value }));
     };
 
-    const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(form);
-        alert("Cotxe enviat! (Falta backend)");
+
+        try {
+            const response = await fetch("/api/cars", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...form,
+                    fuel: form.fuel?.join(", "), // convertim array a string
+                }),
+            });
+
+            if (response.ok) {
+                alert("Cotxe enviat correctament!");
+            } else {
+                alert("Error al enviar el cotxe");
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error de connexió amb el servidor");
+        }
     };
 
     return (
