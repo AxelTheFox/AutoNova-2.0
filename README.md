@@ -44,7 +44,18 @@ Aquest projecte forma part de la 2ª Avaluació i compleix els requisits següen
 ## ⚙️ Instal·lació del projecte
 
 Clona el repositori:
-
 ```bash
 git clone https://github.com/AxelTheFox/AutoNova-2AV.git
 cd AutoNova-2AV
+```
+
+Executa en mode desenvolupament:
+```bash
+npm run dev
+```
+
+Obri en el navegador:
+```bash
+http://localhost:3000
+```
+
