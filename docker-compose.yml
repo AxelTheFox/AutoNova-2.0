@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  autonova-app:
+    build: .
+    container_name: autonova-app
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: autonova
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: autonova-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: autonova
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
