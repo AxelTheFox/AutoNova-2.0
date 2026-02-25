@@ -9,6 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="/autonova-logoA.png" />
+      </head>
       <body className="min-h-screen flex flex-col">
         <HeaderBar />
         <main className="grow">{children}</main>

@@ -16,15 +16,7 @@ export async function POST(req: Request) {
         const description = formData.get("description") as string;
 
         const fuel = formData.get("fuel") as string;
-        const allowedFuels = [
-            "gasolina",
-            "diesel",
-            "hibrid",
-            "hibrid enxufable",
-            "electric",
-            "glp",
-            "gnc"
-        ];
+        const allowedFuels = ["gasolina", "diesel", "hibrid", "hibrid enxufable", "electric", "glp", "gnc"];
 
         const normalizedFuel = fuel
             ?.toLowerCase()
@@ -68,9 +60,8 @@ export async function POST(req: Request) {
         await db.query(
             `INSERT INTO cars 
             (brand, model, price, fuel, year, power, km, description, image)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [brand, model, Number(price), fuel,
-                Number(year), Number(power), Number(km), description, imagePaths[0] || null
-            ]
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [brand, model, Number(price), fuel, Number(year), Number(power), Number(km), description, imagePaths[0] || null]
         );
 
         return NextResponse.json({ message: "Cotxe guardat correctament" }, { status: 201 });
