@@ -25,15 +25,26 @@ export default function SellPage() {
         event.preventDefault();
 
         try {
+            const formData = new FormData();
+
+            formData.append("brand", form.brand || "");
+            formData.append("model", form.model || "");
+            formData.append("price", String(form.price || 0));
+            formData.append("fuel", form.fuel?.join(", ") || "");
+            formData.append("year", String(form.year || 0));
+            formData.append("power", String(form.power || 0));
+            formData.append("km", String(form.km || 0));
+            formData.append("description", form.description || "");
+
+            if (form.images) {
+                Array.from(form.images).forEach((file) => {
+                    formData.append("images", file);
+                });
+            }
+
             const response = await fetch("/api/cars", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    ...form,
-                    fuel: form.fuel?.join(", "), // convertim array a string
-                }),
+                body: formData, // 🚨 IMPORTANT: NO posar headers
             });
 
             if (response.ok) {
@@ -77,13 +88,17 @@ export default function SellPage() {
                     required
                 />
 
-                <input
-                    type="text"
-                    placeholder="Combustible (separat per comes)"
-                    className="w-full p-2 border"
-                    onChange={(e) => update("fuel", e.target.value.split(",").map((f) => f.trim()))}
-                    required
-                />
+                <select name="fuel" required className="w-full border p-2 rounded">
+                    <option value="">Selecciona combustible</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Diesel">Dièsel</option>
+                    <option value="Híbrid">Híbrid</option>
+                    <option value="Híbrid Enxufable">Híbrid Enxufable</option>
+                    <option value="Elèctric">Elèctric</option>
+                    <option value="GLP">GLP</option>
+                    <option value="GLC">GLC</option>
+                </select>
+
 
                 <input
                     type="number"

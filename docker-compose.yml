@@ -13,6 +13,8 @@ services:
       DB_NAME: autonova
     depends_on:
       - db
+    volumes:
+      - ./public/uploads:/app/public/uploads
 
   db:
     image: mysql:8

@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import SearchBar from "@/components/SearchBar";
 import CarCard from "@/components/CarCard";
 
 export const dynamic = "force-dynamic";
@@ -9,11 +8,7 @@ type Car = {
   brand: string;
   model: string;
   price: number;
-  fuel: string;
-  year: number;
-  power: number;
-  km: number;
-  description: string;
+  image?: string;
 };
 
 export default async function HomePage() {
@@ -22,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <div className="p-6 max-w-6xl mx-auto text-center">
-      <h1 className="text-3xl font-bold mb-4">Cotxes en venta</h1>
+      <h1 className="text-3xl font-bold mb-4">Cotxes en vent  a</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {cars.map((car) => (
           <CarCard
@@ -33,7 +28,7 @@ export default async function HomePage() {
               brand: car.brand,
               model: car.model,
               price: car.price,
-              images: [],
+              images: car.image ? [car.image] : [],
             }}
           />
         ))}
