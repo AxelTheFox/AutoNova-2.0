@@ -15,11 +15,11 @@ export default function CarCard({ car }: CarCardProps) {
   return (
     <div className="border rounded p-4 shadow">
       {car.images.length > 0 ? (
-        <Image
+        <img
           src={car.images[0]}
           alt={car.title}
-          width={400}
-          height={250}
+          // width={400}
+          // height={250}
           className="object-cover w-full h-64 rounded mb-2"
         />
       ) : (

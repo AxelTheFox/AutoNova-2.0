@@ -6,7 +6,7 @@ type CarForm = {
     brand?: string;
     model?: string;
     price?: number;
-    fuel?: string[];
+    fuel?: string;
     year?: number;
     power?: number;
     km?: number;
@@ -30,7 +30,7 @@ export default function SellPage() {
             formData.append("brand", form.brand || "");
             formData.append("model", form.model || "");
             formData.append("price", String(form.price || 0));
-            formData.append("fuel", form.fuel?.join(", ") || "");
+            formData.append("fuel", form.fuel || "");
             formData.append("year", String(form.year || 0));
             formData.append("power", String(form.power || 0));
             formData.append("km", String(form.km || 0));
@@ -44,7 +44,7 @@ export default function SellPage() {
 
             const response = await fetch("/api/cars", {
                 method: "POST",
-                body: formData, // 🚨 IMPORTANT: NO posar headers
+                body: formData,
             });
 
             if (response.ok) {
@@ -88,7 +88,7 @@ export default function SellPage() {
                     required
                 />
 
-                <select name="fuel" required className="w-full border p-2 rounded">
+                <select required className="w-full border p-2 rounded" onChange={(e) => update("fuel", e.target.value)}>
                     <option value="">Selecciona combustible</option>
                     <option value="Gasolina">Gasolina</option>
                     <option value="Diesel">Dièsel</option>
@@ -96,9 +96,8 @@ export default function SellPage() {
                     <option value="Híbrid Enxufable">Híbrid Enxufable</option>
                     <option value="Elèctric">Elèctric</option>
                     <option value="GLP">GLP</option>
-                    <option value="GLC">GLC</option>
+                    <option value="GNC">GNC</option>
                 </select>
-
 
                 <input
                     type="number"
