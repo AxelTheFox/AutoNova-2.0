@@ -6,9 +6,7 @@ export async function GET() {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
-    if (!token) {
-        return NextResponse.json({ user: null });
-    }
+    if (!token) return NextResponse.json({ user: null });
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { id: number; email: string; name: string };

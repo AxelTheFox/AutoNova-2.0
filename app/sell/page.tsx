@@ -36,22 +36,17 @@ export default function SellPage() {
             formData.append("km", String(form.km || 0));
             formData.append("description", form.description || "");
 
-            if (form.images) {
-                Array.from(form.images).forEach((file) => {
-                    formData.append("images", file);
-                });
-            }
+            if (form.images) Array.from(form.images).forEach((file) => {
+                formData.append("images", file);
+            });
 
             const response = await fetch("/api/cars", {
                 method: "POST",
                 body: formData,
             });
 
-            if (response.ok) {
-                alert("Cotxe enviat correctament!");
-            } else {
-                alert("Error al enviar el cotxe");
-            }
+            if (response.ok) alert("Cotxe enviat correctament!");
+            else alert("Error al enviar el cotxe");
 
         } catch (error) {
             console.error("Error:", error);
