@@ -9,7 +9,6 @@ Aquest projecte forma part de la 2ª Avaluació i compleix els requisits següen
 - Disseny amb TailwindCSS
 - Backend amb MySQL
 - Contenidorització amb Docker
-- Desplegament en Azure
 
 ---
 
@@ -25,12 +24,6 @@ Aquest projecte forma part de la 2ª Avaluació i compleix els requisits següen
 - Node.js
 - API Routes de Next.js
 - MySQL
-
-### DevOps
-- Docker
-- Azure App Service (previst)
-
----
 
 ## 📂 Estructura del projecte
 - app/ → Rutes principals (App Router)
