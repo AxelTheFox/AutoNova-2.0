@@ -24,19 +24,13 @@ export async function POST(req: Request) {
             .replace(/[\u0300-\u036f]/g, "");
 
         if (!normalizedFuel || !allowedFuels.includes(normalizedFuel)) {
-            return NextResponse.json(
-                { error: "Combustible no vàlid." },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: "Combustible no vàlid." }, { status: 400 });
         }
 
         const images = formData.getAll("images") as File[];
 
-        if (!brand || !model || !price) {
-            return NextResponse.json({ error: "Falten camps obligatoris." }, { status: 400 });
-        }
+        if (!brand || !model || !price) return NextResponse.json({ error: "Falten camps obligatoris." }, { status: 400 });
 
-    // Carpeta per pujar imatges
         const uploadsDir = path.join(process.cwd(), "public/uploads");
         await mkdir(uploadsDir, { recursive: true });
 
