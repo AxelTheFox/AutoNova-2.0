@@ -11,8 +11,10 @@ services:
       DB_USER: root
       DB_PASSWORD: root
       DB_NAME: autonova
+      JWT_SECRET: supersecretkey123
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./public/uploads:/app/public/uploads
 
@@ -25,6 +27,11 @@ services:
       MYSQL_DATABASE: autonova
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - mysql_data:/var/lib/mysql
 
